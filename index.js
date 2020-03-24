@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2020 - DroneBlocks, LLC
  * Author: Dennis Baldwin
- *
+ * URL: https://github.com/dbaldwin/tello-video-nodejs-websockets
  */
 
 // Import necessary modules for the project
