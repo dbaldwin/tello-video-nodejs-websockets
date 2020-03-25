@@ -1,66 +1,38 @@
 # Tello Video Stream with Node.js and WebSockets
 
-I've been looking for a way to retrieve Tello's video stream from the SDK command streamon. I also wanted to do this with the bare minimum libraries/modules and keep it as simple as possible. 
+I've been looking for a way to retrieve Tello's video stream from the SDK command streamon. I also wanted to do this with the bare minimum libraries/modules and keep it as simple as possible. This has been tested on Mac and Windows.
 
 ---
 ## Requirements
 
-The main requirement is that you need to have FFmpeg installed for this to work.
+You'll need Node.js installed. You can download it from here:
 
-### Node
-- #### Node installation on Windows
+https://nodejs.org/en/download/
 
-  Just go on [official Node.js website](https://nodejs.org/) and download the installer.
-Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
+You will also need FFmpeg installed. Here is a great resource for installing on Mac:
 
-- #### Node installation on Ubuntu
+http://jollejolles.com/install-ffmpeg-on-mac-os-x/
 
-  You can install nodejs and npm easily with apt install, just run the following commands.
+and for Windows:
 
-      $ sudo apt install nodejs
-      $ sudo apt install npm
-
-- #### Other Operating Systems
-  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
-
-If the installation was successful, you should be able to run the following command.
-
-    $ node --version
-    v8.11.3
-
-    $ npm --version
-    6.1.0
-
-If you need to update `npm`, you can make it using `npm`! Cool right? After running the following command, just open again the command line and be happy.
-
-    $ npm install npm -g
-
-###
-### Yarn installation
-  After installing node, this project will need yarn too, so just run the following command.
-
-      $ npm install -g yarn
+https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg
 
 ---
 
-## Install
+## Cloning
 
-    $ git clone https://github.com/YOUR_USERNAME/PROJECT_TITLE
-    $ cd PROJECT_TITLE
-    $ yarn install
+You'll need to clone this repository and install the necessary modules:
 
-## Configure app
+    $ git clone https://github.com/dbaldwin/tello-video-nodejs-websockets
+    $ cd tello-video-nodejs-websockets
+    $ npm install
 
-Open `a/nice/path/to/a.file` then edit it with your settings. You will need:
+---
 
-- A setting;
-- Another setting;
-- One more setting;
+## Running
 
-## Running the project
+    $ node index.js
 
-    $ yarn start
+## Accessing
 
-## Simple build for production
-
-    $ yarn build
+    $ http://localhost:3000
