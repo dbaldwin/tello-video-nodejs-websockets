@@ -19,7 +19,7 @@ https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg
 
 ---
 
-## Cloning
+## Installing
 
 You'll need to clone this repository and install the necessary modules:
 
@@ -30,6 +30,8 @@ You'll need to clone this repository and install the necessary modules:
 ---
 
 ## Running
+
+Make sure you power up Tello and connect to its network first. The reason is that our script sends "command" and "streamon" SDK commands to start the stream. This will not work if Tello isn't connected. After connecting to Tello run the following command:
 
     $ node index.js
 
