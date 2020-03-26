@@ -2,10 +2,14 @@
 
 I've been looking for a way to retrieve Tello's video stream from the SDK command streamon. I also wanted to do this with the bare minimum libraries/modules and keep it as simple as possible. This has been tested on Mac and Windows.
 
+If you'd also like to learn how to do this in Node-RED then check out this YouTube video:
+
+
+
 ---
 ## Requirements
 
-You'll need Node.js installed. You can download it from here:
+You'll need Node.js and npm installed. You can download and install the binaries from here:
 
 https://nodejs.org/en/download/
 
@@ -19,7 +23,7 @@ https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg
 
 ---
 
-## Installing
+## Code
 
 You'll need to clone this repository and install the necessary modules:
 
@@ -31,10 +35,12 @@ You'll need to clone this repository and install the necessary modules:
 
 ## Running
 
-Make sure you power up Tello and connect to its network first. The reason is that our script sends "command" and "streamon" SDK commands to start the stream. This will not work if Tello isn't connected. After connecting to Tello run the following command:
+Make sure you power up Tello and connect to its network first. The reason is that our script sends "command" and "streamon" SDK commands to start the stream. This will not work if Tello isn't connected. After connecting to Tello run the following command from witin the tello-video-nodejs-websockets directory:
 
     $ node index.js
 
-## Accessing
+## Accessing the Video Stream
 
-    $ http://localhost:3000
+Once the code is running you can access the following url in your browser and hopefully see Tello's video stream:
+
+    $ http://localhost:3000/index.html
