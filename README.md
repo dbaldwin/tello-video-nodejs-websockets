@@ -44,3 +44,9 @@ Make sure you power up Tello and connect to its network first. The reason is tha
 Once the code is running you can access the following url in your browser and hopefully see Tello's video stream:
 
     $ http://localhost:3000/index.html
+
+## Thank You
+
+A special thanks to the JSMpeg developer for figuring out how to decode the video steam. More info on the project here:
+
+https://github.com/phoboslab/jsmpeg
