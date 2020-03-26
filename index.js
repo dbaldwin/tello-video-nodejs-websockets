@@ -4,20 +4,37 @@
  * Copyright (c) 2020 - DroneBlocks, LLC
  * Author: Dennis Baldwin
  * URL: https://github.com/dbaldwin/tello-video-nodejs-websockets
+ *
+ * PLEASE REVIEW THE README FILE FIRST
+ * YOU MUST POWER UP AND CONNECT TO TELLO BEFORE RUNNING THIS SCRIPT
  */
 
 // Import necessary modules for the project
+// A basic http server that we'll access to view the stream
 const http = require('http');
-const fs = require('fs');
-const WebSocket = require('ws');
-const spawn = require('child_process').spawn; // For spawning ffmpeg
 
-// Ports that are used in the app
+// To keep things simple we read the index.html page and send it to the client
+const fs = require('fs');
+
+// WebSocket for broadcasting stream to connected clients
+const WebSocket = require('ws');
+
+// We'll spawn ffmpeg as a separate process
+const spawn = require('child_process').spawn;
+
+// For sending SDK commands to Tello
+const dgram = require('dgram');
+
+// HTTP and streaming ports
 const HTTP_PORT = 3000;
 const STREAM_PORT = 3001
 
+// Tello's ID and Port
+const TELLO_IP = '192.168.10.1'
+const TELLO_PORT = 8889
+
 /*
-  Create the web server that the user can access at
+  1. Create the web server that the user can access at
   http://localhost:3000/index.html
 */
 server = http.createServer(function(request, response) {
@@ -44,7 +61,7 @@ server = http.createServer(function(request, response) {
 }).listen(HTTP_PORT); // Listen on port 3000
 
 /*
-  Create the stream server where the video stream will be sent
+  2. Create the stream server where the video stream will be sent
 */
 const streamServer = http.createServer(function(request, response) {
 
@@ -64,7 +81,7 @@ const streamServer = http.createServer(function(request, response) {
 }).listen(STREAM_PORT); // Listen for streams on port 3001
 
 /*
-  Begin web socket server
+  3. Begin web socket server
 */
 const webSocketServer = new WebSocket.Server({
   server: streamServer
@@ -79,8 +96,24 @@ webSocketServer.broadcast = function(data) {
   });
 };
 
+/* 
+  4. Send the command and streamon SDK commands to begin the Tello video stream.
+  YOU MUST POWER UP AND CONNECT TO TELL BEFORE RUNNING THIS SCRIPT
+*/
+const udpClient = dgram.createSocket('udp4');
+
+// These send commands could be smarter by waiting for the SDK to respond with 'ok' and handling errors
+// Send command
+udpClient.send("command", TELLO_PORT, TELLO_IP, (err) => {});
+
+// Send streamon
+udpClient.send("streamon", TELLO_PORT, TELLO_IP, (err) => {});
+
+// Close the connection for now
+udpClient.close();
+
 /*
-  Begin the ffmpeg stream. You must have Tello connected first
+  5. Begin the ffmpeg stream. You must have Tello connected first
 */
 var args = [
   "-i", "udp://0.0.0.0:11111",
