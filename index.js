@@ -104,31 +104,32 @@ const udpClient = dgram.createSocket('udp4');
 
 // These send commands could be smarter by waiting for the SDK to respond with 'ok' and handling errors
 // Send command
-udpClient.send("command", TELLO_PORT, TELLO_IP, (err) => {});
+udpClient.send("command", TELLO_PORT, TELLO_IP, null);
 
 // Send streamon
-udpClient.send("streamon", TELLO_PORT, TELLO_IP, (err) => {});
-
-// Close the connection for now
-udpClient.close();
+udpClient.send("streamon", TELLO_PORT, TELLO_IP, null);
 
 /*
   5. Begin the ffmpeg stream. You must have Tello connected first
 */
-var args = [
-  "-i", "udp://0.0.0.0:11111",
-  "-r", "30",
-  "-s", "960x720",
-  "-codec:v", "mpeg1video",
-  "-b", "800k",
-  "-f", "mpegts",
-  "http://127.0.0.1:3001/stream"
-];
 
-// Spawn an ffmpeg instance
-var streamer = spawn('ffmpeg', args);
-// Uncomment if you want to see ffmpeg stream info
-//streamer.stderr.pipe(process.stderr);
-streamer.on("exit", function(code){
-    console.log("Failure", code);
-});
+// Delay for 3 seconds before we start ffmpeg
+setTimeout(function() {
+  var args = [
+    "-i", "udp://0.0.0.0:11111",
+    "-r", "30",
+    "-s", "960x720",
+    "-codec:v", "mpeg1video",
+    "-b", "800k",
+    "-f", "mpegts",
+    "http://127.0.0.1:3001/stream"
+  ];
+
+  // Spawn an ffmpeg instance
+  var streamer = spawn('ffmpeg', args);
+  // Uncomment if you want to see ffmpeg stream info
+  //streamer.stderr.pipe(process.stderr);
+  streamer.on("exit", function(code){
+      console.log("Failure", code);
+  });
+}, 3000);
